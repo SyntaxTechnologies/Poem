@@ -1,17 +1,49 @@
-public static String extractNumbers(String input) {
-        // Define the regex pattern to match digits
-        Pattern pattern = Pattern.compile("\\d+");
-        Matcher matcher = pattern.matcher(input);
+import java.time.ZonedDateTime;
+        import java.time.ZoneId;
+        import java.time.format.DateTimeFormatter;
+        import java.time.format.DateTimeParseException;
 
-        // Using StringBuilder to efficiently build the result string
-        StringBuilder numbers = new StringBuilder();
+        public class TimeChecker {
 
-        // Find all matches of the pattern in the input string
-        while (matcher.find()) {
-            // Append each match to the StringBuilder
-            numbers.append(matcher.group());
+        // Method to validate the passed time in "HH:mm" format against Central Time (Chicago)
+        public static boolean validateTimeWithCentralChicagoTime(String inputTime) {
+        try {
+        // Get the current time in Central Time (Chicago) formatted as "HH:mm"
+        ZoneId centralTimeZone = ZoneId.of("America/Chicago");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        String centralTime = ZonedDateTime.now(centralTimeZone).format(timeFormatter);
+
+        // Compare the passed time with the current Central Chicago time
+        return centralTime.equals(inputTime);
+        } catch (DateTimeParseException e) {
+        System.out.println("Invalid time format. Please provide the time in 'HH:mm' format.");
+        return false;
+        }
+        }
         }
 
-        // Convert the StringBuilder to a string and return it
-        return numbers.toString();
-    }
+
+
+        import java.time.ZonedDateTime;
+        import java.time.ZoneId;
+        import java.time.format.DateTimeFormatter;
+        import java.time.format.DateTimeParseException;
+
+        public class TimeChecker {
+
+        // Method to validate the passed date in "MMddyyyy" format against Central Time (Chicago)
+        public static boolean validateDateWithCentralChicagoTime(String inputDate) {
+        try {
+        // Get the current date in Central Time (Chicago) formatted as "MMddyyyy"
+        ZoneId centralTimeZone = ZoneId.of("America/Chicago");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMddyyyy");
+        String centralDate = ZonedDateTime.now(centralTimeZone).format(dateFormatter);
+
+        // Compare the passed date with the current Central Chicago date
+        return centralDate.equals(inputDate);
+        } catch (DateTimeParseException e) {
+        System.out.println("Invalid date format. Please provide the date in 'MMddyyyy' format.");
+        return false;
+        }
+        }
+        }
