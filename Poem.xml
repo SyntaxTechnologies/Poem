@@ -47,3 +47,40 @@ import java.time.ZonedDateTime;
         }
         }
         }
+
+
+
+        mport io.qameta.allure.Allure;
+
+        public class YourTestSteps {
+
+        public void compareQueries() {
+        String query1 = "SELECT * FROM table1";
+        String query2 = "SELECT * FROM table2";
+
+        String result1 = executeQuery(query1);
+        String result2 = executeQuery(query2);
+
+        // Attach queries to the Allure report
+        Allure.addAttachment("Query 1", query1);
+        Allure.addAttachment("Query 2", query2);
+
+        // Attach results to the Allure report
+        Allure.addAttachment("Result 1", result1);
+        Allure.addAttachment("Result 2", result2);
+
+        // Perform comparison
+        compareResults(result1, result2);
+        }
+
+        private String executeQuery(String query) {
+        // Execute the query and return result
+        String result = database.execute(query);
+        return result;
+        }
+
+        private void compareResults(String expected, String actual) {
+        Allure.step("Comparing results");
+        Assert.assertEquals(expected, actual);
+        }
+        }
